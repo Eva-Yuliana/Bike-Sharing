@@ -9,7 +9,7 @@ st.title("📊 Bike Sharing Dashboard")
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv("D:\submission\data\hour.csv")  
+    data = pd.read_csv("data\hour.csv")  
     data["dteday"] = pd.to_datetime(data["dteday"])
     data["hour"] = data["hr"]  
     data["month"] = data["dteday"].dt.month  
