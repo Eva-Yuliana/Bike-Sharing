@@ -43,15 +43,15 @@ filtered_df = df[
 
 col1, col2 = st.columns(2)
 
-# Faktor utama yang mempengaruhi penyewaan sepeda
+# 🔥 PERBAIKAN: Faktor utama yang mempengaruhi penyewaan sepeda (KONSISTEN DENGAN NOTEBOOK)
 with col1:
-    st.subheader("📈 Faktor yang Mempengaruhi Penyewaan Sepeda")
+    st.subheader("📈 Korelasi Faktor yang Mempengaruhi Penyewaan Sepeda")
     correlation_matrix = filtered_df[["cnt", "temp", "hum", "windspeed"]].corr()
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", fmt=".2f", ax=ax)
     st.pyplot(fig)
 
-# Tren penggunaan sepeda dalam sehari
+# 🔥 PERBAIKAN: Tren penggunaan sepeda dalam sehari (KONSISTEN DENGAN NOTEBOOK)
 with col2:
     st.subheader("⏰ Tren Penggunaan Sepeda per Jam")
     avg_hourly_usage = filtered_df.groupby("hour")["cnt"].mean().reset_index()
@@ -63,7 +63,7 @@ with col2:
     plt.grid(True)
     st.pyplot(fig)
 
-# Visualisasi Penyewaan Sepeda Berdasarkan Cuaca
+# 🔥 PERBAIKAN: Visualisasi Penyewaan Sepeda Berdasarkan Cuaca (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("🌦 Penyewaan Sepeda Berdasarkan Cuaca")
 weather_mapping = {1: "Cerah", 2: "Mendung", 3: "Hujan", 4: "Cuaca Ekstrem"}
 filtered_df["weather_name"] = filtered_df["weathersit"].map(weather_mapping)
@@ -72,27 +72,24 @@ fig, ax = plt.subplots(figsize=(8, 5))
 sns.barplot(data=weather_avg, x="weather_name", y="cnt", palette="Blues", ax=ax)
 st.pyplot(fig)
 
-# Perbandingan Penyewaan Sepeda antara Hari Kerja vs Akhir Pekan
+# 🔥 PERBAIKAN: Perbandingan Penyewaan Sepeda Hari Kerja vs Akhir Pekan (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("🗓 Perbandingan Penyewaan Sepeda: Hari Kerja vs Akhir Pekan")
-day_type_avg = df.groupby("day_type")["cnt"].mean().reset_index()
+day_type_avg = filtered_df.groupby("day_type")["cnt"].mean().reset_index()
 fig, ax = plt.subplots(figsize=(6, 4))
 sns.barplot(data=day_type_avg, x="day_type", y="cnt", palette="coolwarm", ax=ax)
 st.pyplot(fig)
 
-# Tren Penyewaan Sepeda Berdasarkan Hari dalam Seminggu
+# 🔥 PERBAIKAN: Tren Penyewaan Sepeda Berdasarkan Hari dalam Seminggu (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("📆 Tren Penyewaan Sepeda per Hari dalam Seminggu")
-day_week_avg = df.groupby("day_of_week")["cnt"].mean().reset_index()
+day_week_avg = filtered_df.groupby("day_of_week")["cnt"].mean().reset_index()
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.barplot(data=day_week_avg, x="day_of_week", y="cnt", palette="viridis", ax=ax)
 st.pyplot(fig)
 
-# Distribusi Jumlah Penyewaan Sepeda
+# 🔥 PERBAIKAN: Distribusi Jumlah Penyewaan Sepeda (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("📊 Distribusi Penyewaan Sepeda")
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.histplot(filtered_df["cnt"], bins=30, kde=True, color="purple", ax=ax)
 st.pyplot(fig)
 
 st.sidebar.markdown("📌 **Gunakan filter untuk menyesuaikan tampilan dashboard!**")
-
-# Debugging path
-st.write("Current Working Directory:", os.getcwd())
