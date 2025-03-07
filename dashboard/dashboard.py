@@ -4,7 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 
-# Konfigurasi Dashboard
 st.set_page_config(page_title="🚲 Bike Sharing Dashboard", layout="wide")
 st.title("📊 Bike Sharing Dashboard")
 
@@ -22,17 +21,14 @@ df = load_data()
 
 st.sidebar.header("🔎 Filter Data")
 
-# Filter Musim
 season_mapping = {1: "Spring", 2: "Summer", 3: "Fall", 4: "Winter"}
 df["season_name"] = df["season"].map(season_mapping)
 selected_season = st.sidebar.multiselect("🌤 Pilih Musim", options=df["season_name"].unique(), default=df["season_name"].unique())
 
-# Filter Hari Kerja vs Akhir Pekan
 day_type_mapping = {0: "Akhir Pekan", 1: "Hari Kerja"}
 df["day_type"] = df["workingday"].map(day_type_mapping)
 selected_day_type = st.sidebar.radio("🗓 Pilih Jenis Hari", options=df["day_type"].unique(), index=0)
 
-# Filter Berdasarkan Bulan
 selected_month = st.sidebar.slider("📆 Pilih Bulan", min_value=1, max_value=12, value=(1, 12))
 
 filtered_df = df[
@@ -43,7 +39,6 @@ filtered_df = df[
 
 col1, col2 = st.columns(2)
 
-# 🔥 PERBAIKAN: Faktor utama yang mempengaruhi penyewaan sepeda (KONSISTEN DENGAN NOTEBOOK)
 with col1:
     st.subheader("📈 Korelasi Faktor yang Mempengaruhi Penyewaan Sepeda")
     correlation_matrix = filtered_df[["cnt", "temp", "hum", "windspeed"]].corr()
@@ -51,7 +46,6 @@ with col1:
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", fmt=".2f", ax=ax)
     st.pyplot(fig)
 
-# 🔥 PERBAIKAN: Tren penggunaan sepeda dalam sehari (KONSISTEN DENGAN NOTEBOOK)
 with col2:
     st.subheader("⏰ Tren Penggunaan Sepeda per Jam")
     avg_hourly_usage = filtered_df.groupby("hour")["cnt"].mean().reset_index()
@@ -63,7 +57,6 @@ with col2:
     plt.grid(True)
     st.pyplot(fig)
 
-# 🔥 PERBAIKAN: Visualisasi Penyewaan Sepeda Berdasarkan Cuaca (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("🌦 Penyewaan Sepeda Berdasarkan Cuaca")
 weather_mapping = {1: "Cerah", 2: "Mendung", 3: "Hujan", 4: "Cuaca Ekstrem"}
 filtered_df["weather_name"] = filtered_df["weathersit"].map(weather_mapping)
@@ -72,21 +65,18 @@ fig, ax = plt.subplots(figsize=(8, 5))
 sns.barplot(data=weather_avg, x="weather_name", y="cnt", palette="Blues", ax=ax)
 st.pyplot(fig)
 
-# 🔥 PERBAIKAN: Perbandingan Penyewaan Sepeda Hari Kerja vs Akhir Pekan (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("🗓 Perbandingan Penyewaan Sepeda: Hari Kerja vs Akhir Pekan")
 day_type_avg = filtered_df.groupby("day_type")["cnt"].mean().reset_index()
 fig, ax = plt.subplots(figsize=(6, 4))
 sns.barplot(data=day_type_avg, x="day_type", y="cnt", palette="coolwarm", ax=ax)
 st.pyplot(fig)
 
-# 🔥 PERBAIKAN: Tren Penyewaan Sepeda Berdasarkan Hari dalam Seminggu (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("📆 Tren Penyewaan Sepeda per Hari dalam Seminggu")
 day_week_avg = filtered_df.groupby("day_of_week")["cnt"].mean().reset_index()
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.barplot(data=day_week_avg, x="day_of_week", y="cnt", palette="viridis", ax=ax)
 st.pyplot(fig)
 
-# 🔥 PERBAIKAN: Distribusi Jumlah Penyewaan Sepeda (KONSISTEN DENGAN NOTEBOOK)
 st.subheader("📊 Distribusi Penyewaan Sepeda")
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.histplot(filtered_df["cnt"], bins=30, kde=True, color="purple", ax=ax)
