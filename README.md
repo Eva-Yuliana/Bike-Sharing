@@ -1,51 +1,47 @@
-# E-Commerce Dashboard 📊
+# 🚲 Bike Sharing Dashboard
 
-Dashboard ini merupakan aplikasi interaktif berbasis **Streamlit** yang digunakan untuk menganalisis data e-commerce, termasuk harga produk, waktu pengiriman, dan metode pembayaran.
+## 📌 Deskripsi
+Dashboard interaktif ini dibuat menggunakan **Streamlit** untuk menganalisis pola penyewaan sepeda berdasarkan berbagai faktor seperti musim, cuaca, dan waktu dalam sehari.
 
-## 📌 Persyaratan
-Pastikan Anda telah menginstal **Python 3.9+** dan memiliki paket yang diperlukan. Anda bisa menginstalnya menggunakan **pip** atau **conda**.
+## 🛠 Persyaratan
+Pastikan Anda telah menginstal dependensi berikut sebelum menjalankan aplikasi:
 
-## 🛠️ Setup Lingkungan
-
-### 1. Menggunakan Virtual Environment (Opsional)
-Disarankan untuk menggunakan virtual environment agar dependensi lebih terorganisir.
-
-#### Dengan `venv` (bawaan Python)
-```sh
-python -m venv venv
-type venv/Scripts/activate (Windows)
-source venv/bin/activate (Mac/Linux)
-```
-
-#### Dengan `conda`
-```sh
-conda create --name ecommerce_dashboard python=3.9
-conda activate ecommerce_dashboard
-```
-
-### 2. Instalasi Dependensi
-Pastikan semua dependensi terinstal dengan menjalankan perintah berikut:
-```sh
+```bash
 pip install streamlit pandas seaborn matplotlib
 ```
 
-### 3. Menjalankan Aplikasi
-Pastikan Anda berada dalam direktori yang sama dengan `dashboard.py`, lalu jalankan:
-```sh
-streamlit run D:\submission\dashboard\dashboard.py
+## 📂 Struktur File
+```
+D:/submission/
+│── data/
+│   └── hour.csv  # Dataset yang digunakan
+│── dashboard.py  # File utama untuk menjalankan dashboard
+│── README.md     # Dokumentasi proyek ini
+```
 
-## 🗂️ Struktur Data
-Pastikan Anda memiliki dataset yang diperlukan di dalam folder yang sesuai:
-- `orders_dataset.csv`
-- `order_items_dataset.csv`
-- `products_dataset.csv`
-- `order_payments_dataset.csv`
+## ▶ Cara Menjalankan Dashboard
+1. **Pastikan dataset tersedia** di direktori yang benar (`D:/submission/data/hour.csv`).
+2. **Jalankan aplikasi dengan perintah berikut:**
 
-Jika file dataset berada di lokasi lain, sesuaikan path dalam file `dashboard.py`.
+   ```bash
+   streamlit run dashboard/dashboard.py
+   ```
 
-## 📢 Catatan
-- Gunakan sidebar untuk memfilter data sesuai kebutuhan.
-- Pastikan semua dataset tersedia agar visualisasi dapat berjalan dengan baik.
+3. **Dashboard akan terbuka di browser secara otomatis.**
 
-🎯 Selamat menganalisis! 🚀
+## 🔎 Fitur Dashboard
+✅ **Filter Interaktif**: Sesuaikan tampilan berdasarkan musim, jenis hari, dan bulan.  
+✅ **Visualisasi Tren**:
+   - Penyewaan sepeda per musim & cuaca
+   - Tren penggunaan sepeda dalam sehari
+   - Perbandingan penyewaan antara hari kerja & akhir pekan
+   - Distribusi jumlah penyewaan sepeda
+✅ **Korelasi Faktor Cuaca**: Analisis dampak suhu, kelembaban, dan kecepatan angin terhadap jumlah penyewaan sepeda.
+
+## ❗ Troubleshooting
+- Jika dataset tidak ditemukan, pastikan file `hour.csv` berada di direktori yang benar.
+- Jika ada error terkait pustaka Python, coba jalankan ulang perintah **pip install** di atas.
+
+## 📌 Catatan
+Gunakan **sidebar** di dashboard untuk mengatur filter dan melihat hasil analisis dengan lebih jelas! 🚴‍♂️
 
